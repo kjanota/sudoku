@@ -1,8 +1,7 @@
 import * as Sudoku from "./sudoku";
 
 test("Returns true on valid sudoku", () => {
-  expect(() =>
-    Sudoku.isValid(
+  expect(Sudoku.isValid(
       `
             123456789
             456789123
@@ -15,7 +14,7 @@ test("Returns true on valid sudoku", () => {
             912345678
         `
     )
-  ).toThrowError();
+  ).toBe(true);
 });
 
 test("Throws error on invalid input format", () => {
@@ -23,8 +22,7 @@ test("Throws error on invalid input format", () => {
 });
 
 test("Returns false if there is an empty spaces", () => {
-  expect(() =>
-    Sudoku.isValid(
+  expect(Sudoku.isValid(
       `
             123456789
             456789123
@@ -37,12 +35,29 @@ test("Returns false if there is an empty spaces", () => {
             912345678
         `
     )
-  ).toThrowError();
+  ).toBe(false);
 });
 
+test("Returns false if there is too much numbers", () => {
+  expect(Sudoku.isValid(
+      `
+            1234567891
+            456789123
+            789123456
+            2345616891
+            567891234
+            891234567
+            345678912
+            678912345
+            912345678
+        `
+    )
+  ).toBe(false);
+});
+
+
 test("Returns false if there is a duplicate in a row/column", () => {
-  expect(() =>
-    Sudoku.isValid(
+  expect(Sudoku.isValid(
       `
             123456789
             436789123
@@ -55,12 +70,11 @@ test("Returns false if there is a duplicate in a row/column", () => {
             912345678
         `
     )
-  ).toThrowError();
+  ).toBe(false);
 });
 
 test("Returns false if there is a duplicate in a square", () => {
-  expect(() =>
-    Sudoku.isValid(
+  expect(Sudoku.isValid(
       `
             123456789
             789123456
@@ -73,5 +87,5 @@ test("Returns false if there is a duplicate in a square", () => {
             436789123
         `
     )
-  ).toThrowError();
+  ).toBe(false);
 });
